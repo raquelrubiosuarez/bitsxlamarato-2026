@@ -1,0 +1,6 @@
+# Normalitza els salts de línia a LF al repositori
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.pdf binary
