@@ -5,7 +5,7 @@ const ESTATS = {
   feta: { simbol: "✓", text: "Feta" },
 };
 
-export default function Estat({ estat }) {
+export default function EstatProva({ estat }) {
   const { simbol, text } = ESTATS[estat] ?? ESTATS.planificada;
   return (
     <span className={`estat estat-${estat}`}>

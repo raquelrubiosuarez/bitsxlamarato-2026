@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Estat from "./Estat.jsx";
+import EstatProva from "./EstatProva.jsx";
 import { aMinuts } from "../temps.js";
 
 // Itinerari per dia d'un participant: hora, lloc, durada i què cal portar.
@@ -49,7 +49,7 @@ export default function VistaPacient({ peticio, pla }) {
                       <strong>{prova.nom}</strong> · {prova.durada_min} min
                       <div>{a.recursos.map((r) => recursos[r]?.ubicacio ?? r).join(" · ")}</div>
                     </div>
-                    <Estat estat={a.estat} />
+                    <EstatProva estat={a.estat} />
                   </li>
                 );
               })}
