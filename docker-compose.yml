@@ -1,0 +1,24 @@
+# Aixeca el backend (FastAPI + CP-SAT) i el frontend (React).
+# Cal que existeixin backend/Dockerfile i frontend/Dockerfile (pendent de l'esquelet).
+# Ús: cp .env.example .env && docker compose up --build
+
+services:
+  backend:
+    build: ./backend
+    env_file: .env
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    volumes:
+      - ./backend:/app
+      - ./data:/data:ro
+
+  frontend:
+    build: ./frontend
+    env_file: .env
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
