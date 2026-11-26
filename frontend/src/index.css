@@ -1,33 +1,263 @@
-/* Estils mínims i neutres: només estructura i maquetació.
-   L'estil visual definitiu (vegeu .hackathon-rules.md) s'aplicarà després. */
+/* Modernisme clínic. Normes a .hackathon-rules.md (Estil ·). */
+
+:root {
+  --paper: #f5f0e6;
+  --tinta: #1f1d1a;
+  --mao: #b5462f;
+  --rosa: #d98c8c;
+  --verd: #2f6f5e;
+  --blau: #2b5c8a;
+  --ocre: #d9a441;
+
+  --filet: color-mix(in srgb, var(--tinta) 22%, var(--paper));
+  --filet-suau: color-mix(in srgb, var(--tinta) 10%, var(--paper));
+
+  --titols: "Fraunces Variable", Georgia, serif;
+  --text: "Atkinson Hyperlegible", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Escala 1.25 */
+  --t-0: 1rem;
+  --t-1: 1.25rem;
+  --t-2: 1.5625rem;
+  --t-3: 1.953rem;
+  --t-4: 2.441rem;
+
+  --franja: 2.25rem; /* 15 minuts */
+  --rajola: 2.5rem;
+}
 
 * { box-sizing: border-box; }
-body { margin: 0; font-family: system-ui, sans-serif; font-size: 16px; line-height: 1.5; }
-.app { max-width: 1100px; margin: 0 auto; padding: 1rem; }
-.mono { font-family: ui-monospace, monospace; }
 
-.capcalera h1 { margin: 0; }
-.capcalera p { margin: 0 0 1rem; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--tinta);
+  font: 400 var(--t-0) / 1.5 var(--text);
+}
 
-.barra, .controls, .pestanyes, .metriques { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin: 1rem 0; }
-.barra { justify-content: space-between; }
-button[aria-pressed="true"] { font-weight: bold; }
+h1, h2, h3 {
+  font-family: var(--titols);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+}
+h1 { font-size: var(--t-4); font-variation-settings: "opsz" 96; letter-spacing: -0.015em; }
+h2 { font-size: var(--t-2); font-variation-settings: "opsz" 36; }
+h3 { font-size: var(--t-1); font-variation-settings: "opsz" 24; }
+h4 { font-size: var(--t-0); margin: 0; }
+p { margin: 0; }
 
-.avis { border: 1px solid; padding: 0.5rem 0.75rem; }
+.mono { font-family: var(--mono); font-feature-settings: "zero" 1; }
 
-.metrica { display: flex; flex-direction: column; border: 1px solid; padding: 0.5rem 1rem; min-width: 10rem; }
-.metrica-valor { font-size: 1.5rem; font-weight: bold; }
+:focus-visible { outline: 3px solid var(--blau); outline-offset: 2px; }
 
-.gantt { border: 1px solid; }
-.gantt-fila { display: grid; grid-template-columns: 10rem 1fr; border-top: 1px solid; min-height: 2.5rem; }
-.gantt-fila:first-child { border-top: none; }
-.gantt-nom { padding: 0.5rem; border-right: 1px solid; }
-.gantt-pista { position: relative; }
-.gantt-hores { min-height: 1.75rem; }
-.gantt-hora { position: absolute; top: 0.25rem; font-size: 0.75rem; transform: translateX(-50%); }
-.gantt-bloc { position: absolute; top: 0.35rem; bottom: 0.35rem; border: 1px solid; padding: 0 0.25rem; overflow: hidden; font-size: 0.8rem; white-space: nowrap; }
-.gantt-bloc.estat-planificada { border-style: dashed; }
+button, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
 
-.dia { border-top: 1px solid; margin-top: 1rem; }
-.itinerari { list-style: none; padding: 0; }
-.visita { display: grid; grid-template-columns: 8rem 1fr auto; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid; }
+/* Capçalera: l'únic lloc amb patró de rajola */
+.capcalera { border-bottom: 1px solid var(--tinta); }
+.patro { display: block; width: 100%; height: 48px; border-bottom: 1px solid var(--tinta); }
+.capcalera-cos {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 1.25rem 1.5rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: end;
+  justify-content: space-between;
+}
+.capcalera-cos p { margin-top: 0.25rem; max-width: 60ch; }
+
+.boto-principal {
+  background: var(--mao);
+  color: var(--paper);
+  border: 1px solid var(--mao);
+  border-radius: 2px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 700;
+}
+.boto-principal:hover { background: var(--tinta); border-color: var(--tinta); }
+.boto-principal:disabled { cursor: progress; background: var(--paper); color: var(--tinta); border-style: dashed; }
+
+/* Cos */
+.app {
+  max-width: 84rem;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.resum { max-width: 65ch; }
+
+.avis {
+  border: 1px solid var(--ocre);
+  border-left-width: 6px;
+  background: color-mix(in srgb, var(--ocre) 16%, var(--paper));
+  padding: 0.5rem 0.75rem;
+  max-width: 65ch;
+}
+.avis h2 { font-size: var(--t-1); margin-bottom: 0.5rem; }
+.avis ul { margin: 0; padding-left: 1.25rem; }
+
+.buit { border: 1px dashed var(--tinta); padding: 2rem; max-width: 42rem; }
+.buit p { margin-top: 0.5rem; }
+
+/* Mètriques: franja de text, no targetes */
+.metriques {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--tinta);
+  border-bottom: 1px solid var(--tinta);
+}
+.metriques > div { padding: 0.75rem 1.5rem 0.75rem 0; margin-right: 1.5rem; border-right: 1px solid var(--filet); }
+.metriques > div:last-child { border-right: none; }
+.metrica-xifra { font: 600 var(--t-2) / 1.1 var(--titols); font-variant-numeric: tabular-nums; }
+.metriques dd { margin: 0; }
+
+/* Pestanyes */
+.pestanyes { display: flex; gap: 0; border-bottom: 1px solid var(--tinta); }
+.pestanyes button {
+  background: none;
+  border: none;
+  border-bottom: 4px solid transparent;
+  margin-bottom: -1px;
+  padding: 0.5rem 1rem 0.5rem 0;
+  margin-right: 1.5rem;
+}
+.pestanyes button[aria-selected="true"] { border-bottom-color: var(--mao); font-weight: 700; }
+.pestanyes button:hover { border-bottom-color: var(--filet); }
+.pestanyes button[aria-selected="true"]:hover { border-bottom-color: var(--mao); }
+
+/* Llegenda */
+.llegenda { display: flex; flex-wrap: wrap; gap: 0.5rem 2.5rem; }
+.llegenda ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+.llegenda li { display: inline-flex; align-items: center; gap: 0.5rem; }
+.llegenda .rajola { --mida: 1.5rem; }
+
+/* Blocs */
+.bloc { display: flex; flex-direction: column; gap: 0.75rem; }
+.bloc-cap { display: flex; flex-wrap: wrap; gap: 0.75rem 2rem; align-items: baseline; justify-content: space-between; }
+.desplacable { overflow-x: auto; }
+
+.selector-dia { display: flex; }
+.selector-dia button { background: none; border: 1px solid var(--tinta); border-left-width: 0; padding: 0.25rem 0.75rem; }
+.selector-dia button:first-child { border-left-width: 1px; }
+.selector-dia button[aria-pressed="true"] { background: var(--tinta); color: var(--paper); }
+
+.camp { display: inline-flex; gap: 0.5rem; align-items: center; }
+select { background: var(--paper); border: 1px solid var(--tinta); border-radius: 0; padding: 0.25rem 0.5rem; }
+
+.enllac { background: none; border: none; padding: 0; color: var(--blau); text-decoration: underline; text-underline-offset: 3px; }
+.enllac:hover { color: var(--tinta); }
+
+/* La rajola */
+.rajola {
+  --cat: var(--tinta);
+  --mida: var(--rajola);
+  position: relative;
+  display: inline-block;
+  width: var(--mida);
+  height: var(--mida);
+  flex: none;
+  padding: 0;
+  border: 2px solid var(--cat);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--tinta);
+  text-align: left;
+  overflow: hidden;
+}
+.cat-imatge { --cat: var(--blau); }
+.cat-extraccio { --cat: var(--mao); }
+.cat-avaluacio { --cat: var(--tinta); }
+
+.rajola-planificada { border-style: dashed; }
+.rajola-feta { background: color-mix(in srgb, var(--cat) 16%, var(--paper)); }
+.rajola-seleccionada { background: var(--tinta); color: var(--paper); border-color: var(--tinta); }
+button.rajola:hover { outline: 2px solid var(--tinta); outline-offset: 1px; }
+
+.rajola-codi {
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  font: 500 var(--t-0) / 1.2 var(--mono);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+.rajola .glif { position: absolute; right: 2px; bottom: 2px; }
+.rajola-junta { position: absolute; top: 0; bottom: 0; width: 1px; background: color-mix(in srgb, var(--cat) 35%, var(--paper)); }
+.rajola-seleccionada .rajola-junta { background: color-mix(in srgb, var(--paper) 30%, var(--tinta)); }
+
+.glif { flex: none; }
+.glif-feta path { stroke: var(--verd); }
+.glif-confirmada rect { fill: var(--verd); }
+.glif-planificada rect { stroke: var(--tinta); }
+.rajola-seleccionada .glif path, .rajola-seleccionada .glif rect { stroke: var(--paper); }
+.rajola-seleccionada .glif-confirmada rect { fill: var(--paper); }
+
+.estat { display: inline-flex; align-items: center; gap: 0.375rem; }
+
+/* Protocol: participants × dies */
+.protocol { border-collapse: collapse; min-width: 100%; }
+.protocol caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.protocol th, .protocol td { padding: 0.25rem 1rem 0.25rem 0; border-bottom: 1px solid var(--filet-suau); text-align: left; vertical-align: middle; }
+.protocol thead th { font-weight: 700; border-bottom: 1px solid var(--tinta); padding-bottom: 0.375rem; }
+.protocol tbody th { font-weight: 400; }
+.protocol td + td { border-left: 1px solid var(--filet-suau); padding-left: 0.5rem; }
+.protocol td:nth-child(2) { font-variant-numeric: tabular-nums; }
+.fila-activa > * { background: color-mix(in srgb, var(--rosa) 22%, var(--paper)); }
+.fila-activa .enllac { color: var(--tinta); font-weight: 500; }
+.filera { display: flex; gap: 4px; min-height: var(--rajola); }
+
+/* Ocupació: recursos × franges de 15 minuts */
+.ocupacio {
+  display: grid;
+  grid-template-columns: 9rem repeat(var(--franges), var(--franja));
+  grid-auto-rows: var(--franja);
+  width: max-content;
+}
+.ocupacio-hora { border-left: 1px solid var(--tinta); padding-left: 0.25rem; line-height: var(--franja); }
+.ocupacio-recurs { padding-right: 0.75rem; line-height: var(--franja); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-bottom: 1px solid var(--filet-suau); }
+.franja { border-right: 1px solid var(--filet-suau); border-bottom: 1px solid var(--filet-suau); }
+.franja-hora { border-left: 1px solid var(--filet); }
+.ocupacio .rajola { --mida: auto; width: auto; height: auto; margin: 1px; z-index: 1; }
+
+/* Itinerari del participant */
+.dies { display: grid; grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr)); gap: 2rem; }
+.dia { border-top: 1px solid var(--tinta); padding-top: 0.75rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.dia h3 { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.dia-franja { font: 400 var(--t-0) var(--mono); }
+.abans { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.itinerari { list-style: none; margin: 0; padding: 0; --col-hora: 3.75rem; --rajola-itin: 3rem; }
+.parada-cos { display: grid; grid-template-columns: var(--col-hora) var(--rajola-itin) 1fr; gap: 0 0.75rem; align-items: start; }
+.parada-hora { line-height: var(--rajola-itin); }
+.parada .rajola { --mida: var(--rajola-itin); }
+.parada-text { display: flex; flex-direction: column; gap: 0.125rem; padding-top: 0.25rem; }
+.parada-text p { max-width: 45ch; }
+
+/* El tram uneix la rajola anterior amb la següent */
+.tram {
+  margin-left: calc(var(--col-hora) + 0.75rem + var(--rajola-itin) / 2 - 1px);
+  border-left: 2px solid var(--tinta);
+  padding: 0.5rem 0 0.5rem calc(var(--rajola-itin) / 2 + 0.75rem - 1px);
+  min-height: 2.5rem;
+}
+.tram-canvi { border-left: 2px dashed var(--mao); }
+.tram-canvi .tram-text { color: var(--mao); }
+
+@media (max-width: 40rem) {
+  .capcalera-cos, .app { padding-left: 1rem; padding-right: 1rem; }
+  h1 { font-size: var(--t-3); }
+  .dies { grid-template-columns: 1fr; }
+  .metriques > div { padding-right: 1rem; margin-right: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
